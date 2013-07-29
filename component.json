@@ -1,0 +1,15 @@
+{
+  "name": "spatial-hash",
+  "repo": "mteam/spatial-hash",
+  "version": "0.1.0",
+  "dependencies": {
+    "component/set": "*"
+  },
+  "development": {
+    "visionmedia/mocha": "*",
+    "component/assert": "*"
+  },
+  "scripts": [
+    "index.js"
+  ]
+}
