@@ -69,6 +69,24 @@ describe('Spatial hash', function() {
   
   });
 
+  describe('#empty', function() {
+    
+    it('empties the grid', function() {
+      var sh = new SpatialHash(id);
+
+      sh.insert({
+        left: 20, top: 30,
+        right: 80, bottom: 90
+      });
+
+      sh.empty();
+
+      assert(sh.bucket(0, 0).length == 0);
+      assert(sh.bucket(1, 1).length == 0);
+    });
+  
+  });
+
   describe('#collisions', function() {
     
     it('finds possible collisions', function() {

@@ -18,6 +18,12 @@ SpatialHash.prototype.insert = function(obj) {
   }
 };
 
+SpatialHash.prototype.empty = function() {
+  for (var key in this.buckets) {
+    this.buckets[key].length = 0;
+  }
+};
+
 SpatialHash.prototype.collisions = function(obj) {
   var rect = this.rect(obj);
   var bs = this.bounds(rect);
