@@ -4,6 +4,7 @@ function SpatialHash(getRect, size) {
   this.rect = getRect;
   this.size = size || 50;
   this.buckets = {};
+  this._colls = new Set();
   this._bounds = {};
 }
 
@@ -27,7 +28,9 @@ SpatialHash.prototype.empty = function() {
 SpatialHash.prototype.collisions = function(obj) {
   var rect = this.rect(obj);
   var bs = this.bounds(rect);
-  var set = new Set();
+  var set = this._colls;
+
+  set.clear();
 
   for (var x = bs.left; x <= bs.right; x++) {
     for (var y = bs.top; y <= bs.bottom; y++) {
