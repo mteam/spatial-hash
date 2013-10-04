@@ -62,9 +62,9 @@ describe('Spatial hash', function() {
         right: 125, bottom: 125
       });
 
-      assert(sh.buckets['0;0'].length == 1);
-      assert(sh.buckets['1;1'].length == 2);
-      assert(sh.buckets['2;2'].length == 1);
+      assert(sh.buckets['0;0'].length() == 1);
+      assert(sh.buckets['1;1'].length() == 2);
+      assert(sh.buckets['2;2'].length() == 1);
     });
   
   });
@@ -81,8 +81,8 @@ describe('Spatial hash', function() {
 
       sh.empty();
 
-      assert(sh.bucket(0, 0).length == 0);
-      assert(sh.bucket(1, 1).length == 0);
+      assert(sh.bucket(0, 0).length() == 0);
+      assert(sh.bucket(1, 1).length() == 0);
     });
   
   });

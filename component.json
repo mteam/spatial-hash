@@ -3,7 +3,8 @@
   "repo": "mteam/spatial-hash",
   "version": "0.1.2",
   "dependencies": {
-    "mteam/set": "*"
+    "mteam/set": "*",
+    "mteam/linked-list": "*"
   },
   "development": {
     "visionmedia/mocha": "*",

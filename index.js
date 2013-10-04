@@ -1,7 +1,8 @@
 var Set = require('set');
+var List = require('linked-list');
 
 function SpatialHash(getRect, size) {
-  this.rect = getRect;
+  this.getRect = getRect;
   this.size = size || 50;
   this.buckets = {};
   this._colls = new Set();
@@ -9,24 +10,24 @@ function SpatialHash(getRect, size) {
 }
 
 SpatialHash.prototype.insert = function(obj) {
-  var rect = this.rect(obj);
+  var rect = this.getRect(obj);
   var bs = this.bounds(rect);
 
   for (var x = bs.left; x <= bs.right; x++) {
     for (var y = bs.top; y <= bs.bottom; y++) {
-      this.bucket(x, y).push(obj);
+      this.bucket(x, y).append(obj);
     }
   }
 };
 
 SpatialHash.prototype.empty = function() {
   for (var key in this.buckets) {
-    this.buckets[key].length = 0;
+    this.buckets[key].empty();
   }
 };
 
 SpatialHash.prototype.collisions = function(obj) {
-  var rect = this.rect(obj);
+  var rect = this.getRect(obj);
   var bs = this.bounds(rect);
   var set = this._colls;
 
@@ -35,7 +36,7 @@ SpatialHash.prototype.collisions = function(obj) {
   for (var x = bs.left; x <= bs.right; x++) {
     for (var y = bs.top; y <= bs.bottom; y++) {
       var bucket = this.bucket(x, y);
-      bucket.forEach(set.add, set);
+      bucket.each(set.add, set);
     }
   }
 
@@ -45,7 +46,7 @@ SpatialHash.prototype.collisions = function(obj) {
 
 SpatialHash.prototype.bucket = function(x, y) {
   var hash = x + ';' + y;
-  return this.buckets[hash] || (this.buckets[hash] = []);
+  return this.buckets[hash] || (this.buckets[hash] = new List());
 };
 
 SpatialHash.prototype.bounds = function(rect) {
